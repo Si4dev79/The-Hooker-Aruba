@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - The Hooker Fishing & Snorkeling</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <!-- All styles are now defined directly in this file -->
+
+    <!-- Custom Fonts -->
+    <link rel="preload" href="fonts/WinkyRough.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Custom styles for photo gallery page */
+
+        /* Hero Header Styles */
+        .hero-header {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            overflow: hidden;
+            margin-bottom: 0;
+            background-color: #1a3c6e;
+        }
+
+        .hero-header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 60, 110, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding-top: 20vh;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-weight: 800;
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-weight: 300;
+            line-height: 1.5;
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .hero-wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            line-height: 0;
+        }
+
+        .hero-wave svg {
+            width: 100%;
+            height: 70px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            font-weight: 700;
+            color: #1a3c6e; /* Match heading color */
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #f8c12c; /* Match accent color */
+            margin: 15px auto 0;
+        }
+
+        .bg-light {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background-color: #f8c12c; /* Match primary button color */
+            border-color: #f8c12c;
+            color: #1a3c6e; /* Match button text color */
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #e6b424; /* Slightly darker on hover */
+            border-color: #e6b424;
+            color: #1a3c6e;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-box i {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #1a3c6e; /* Match footer background */
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer h5 {
+            color: #f8c12c; /* Match footer heading color */
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer ul li a:hover {
+            color: #f8c12c; /* Match footer link hover */
+            text-decoration: none;
+        }
+
+        .social-icons {
+            font-size: 1.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            margin-right: 15px;
+        }
+
+        .social-icons a:hover {
+            color: #f8c12c; /* Match social icon hover */
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Modern Gallery Styles */
+
+        /* Gallery Filter Buttons */
+        .gallery-filter {
+            margin-bottom: 30px;
+        }
+
+        .btn-filter {
+            background-color: #f8f9fa;
+            color: #495057;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            padding: 8px 20px;
+            margin: 0 5px 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-filter:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .btn-filter.active {
+            background-color: #1a3c6e;
+            color: white;
+            border-color: #1a3c6e;
+        }
+
+        /* Gallery Cards */
+        .gallery-masonry {
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            margin-bottom: 30px;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: white;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-card-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-card-img img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover .gallery-card-img img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 60, 110, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay-content {
+            text-align: center;
+        }
+
+        .gallery-zoom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            color: #1a3c6e;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            transform: scale(0);
+            margin: 0 5px;
+        }
+
+        .gallery-card:hover .gallery-zoom {
+            transform: scale(1);
+        }
+
+        .gallery-zoom:hover {
+            background-color: #f8c12c;
+            color: white;
+        }
+
+        .gallery-card-body {
+            padding: 20px;
+        }
+
+        .gallery-card-body h5 {
+            margin-bottom: 10px;
+            color: #1a3c6e;
+            font-weight: 600;
+        }
+
+        .gallery-category {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Carousel Styles (for backward compatibility) */
+        .gallery-carousel {
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        .carousel-caption {
+            background: rgba(26, 60, 110, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            bottom: 20px;
+        }
+
+        /* Make sure dropdown works properly */
+        .dropdown-menu {
+            display: none;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
+
+        /* Enhanced Video Gallery Styles */
+        .bg-pattern {
+            background-color: #f8f9fa;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a3c6e' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .video-grid {
+            margin-bottom: 30px;
+        }
+
+        .video-feature-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-feature-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .video-preview {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-preview img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-feature-card:hover .video-preview img {
+            transform: scale(1.1);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .play-button {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(248, 193, 44, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            transform: scale(0.9);
+            box-shadow: 0 0 0 0 rgba(248, 193, 44, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(248, 193, 44, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(248, 193, 44, 0);
+            }
+            100% {
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(248, 193, 44, 0);
+            }
+        }
+
+        .video-feature-card:hover .play-button {
+            transform: scale(1.1);
+            background-color: #f8c12c;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .video-feature-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-feature-content h4 {
+            color: #1a3c6e;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .video-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #adb5bd;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .video-meta span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .video-meta i {
+            margin-right: 5px;
+            color: #f8c12c;
+        }
+
+        /* Video Modal Styles */
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: #1a3c6e;
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-header .close {
+            color: white;
+            opacity: 0.8;
+            text-shadow: none;
+        }
+
+        .modal-header .close:hover {
+            opacity: 1;
+        }
+
+        .embed-responsive {
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+        }
+
+        /* Video Carousel Styles */
+        .video-carousel {
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 15px;
+            bottom: 20px;
+        }
+
+        .video-thumbnail-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .video-thumbnail {
+            width: 120px;
+            height: 68px;
+            margin: 0 5px;
+            cursor: pointer;
+            position: relative;
+            border: 3px solid transparent;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail.active {
+            border-color: #f8c12c;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-icon i {
+            font-size: 12px;
+        }
+
+        #videoCarousel .carousel-control-prev,
+        #videoCarousel .carousel-control-next {
+            width: 10%;
+        }
+
+        /* Remove or modify this CSS if it exists in your page */
+        .video-background::before,
+        .video-container::before,
+        .video-overlay,
+        .background-overlay {
+            background: none !important; /* This removes any background overlay */
+            background-color: transparent !important;
+            opacity: 0 !important;
+        }
+
+        /* If the overlay is implemented differently, you might need to modify these */
+        .video-section .overlay,
+        .video-container .overlay,
+        [class*="-overlay"] {
+            background: none !important;
+            opacity: 0 !important;
+        }
+
+        /* If the video has a gradient overlay */
+        .video-background::after,
+        .video-container::after {
+            background: none !important;
+            background-image: none !important;
+        }
+
+        /* Gallery-specific styles */
+
+
+
+        /* Gallery-specific styles */
+
+
+        /* Complete navbar styles */
+        .navbar {
+            background-color: #1a3c6e; /* Dark blue background for navbar */
+            padding: 5px 0; /* Padding for the navbar */
+            min-height: 50px; /* Minimum height for navbar */
+            width: 100%; /* Full width */
+            position: fixed; /* Fixed position */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure it stays above other content */
+        }
+
+        /* Navbar Brand (Logo) - Keep Winky Rough font as requested */
+        .navbar-brand {
+            font-family: 'Winky Rough', cursive !important;
+            color: #FFFFFF !important; /* White color for navbar brand */
+            font-weight: 700 !important; /* Match landing page font weight */
+            font-size: 24px !important;
+            margin-right: 20px !important;
+        }
+
+        /* Navbar Links */
+        .nav-link {
+            color: #FFFFFF !important; /* White color for navbar links */
+            font-weight: normal !important;
+            padding: 0.5rem 1rem !important;
+        }
+
+        /* Navbar Link Hover */
+        .nav-link:hover {
+            color: #f8c12c !important; /* Gold color on hover */
+        }
+
+        /* Active Navbar Link */
+        .navbar-dark .navbar-nav .active > .nav-link,
+        .nav-item.active .nav-link {
+            color: #f8c12c !important; /* Gold color for active link */
+        }
+
+        /* Navbar Toggler (Hamburger Menu) */
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            padding: 0.25rem 0.75rem !important;
+        }
+
+        .navbar-toggler:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Navbar Collapse (Dropdown Menu) */
+        .navbar-collapse {
+            background-color: #1a3c6e;
+            padding: 10px;
+            border-radius: 0 0 8px 8px;
+            margin-top: 5px;
+        }
+
+        /* Navbar Items in Dropdown */
+        .navbar-collapse .nav-item {
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px 0;
+        }
+
+        .navbar-collapse .nav-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Book Now Button */
+        .navbar-nav .nav-item:last-child .nav-link {
+            background-color: #f8c12c;
+            color: #1a3c6e !important;
+            border-radius: 5px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 5px 15px;
+            display: inline-block;
+        }
+
+
+       /* Simple parallax effect */
+       .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+       }
+    </style>
+
+    <!-- Required JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    <!-- Gallery and Navigation Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Fancybox for gallery images
+            $('[data-fancybox="gallery"]').fancybox({
+                buttons: [
+                    "zoom",
+                    "share",
+                    "slideShow",
+                    "fullScreen",
+                    "download",
+                    "thumbs",
+                    "close"
+                ],
+                loop: true,
+                protect: true,
+                animationEffect: "fade",
+                transitionEffect: "slide"
+            });
+
+            // Gallery filtering functionality
+            $('.btn-filter').on('click', function() {
+                var filter = $(this).data('filter');
+
+                // Update active button
+                $('.btn-filter').removeClass('active');
+                $(this).addClass('active');
+
+                // Filter gallery items
+                if (filter === 'all') {
+                    $('.gallery-item').fadeIn(300);
+                } else {
+                    $('.gallery-item').hide();
+                    $('.gallery-item[data-category="' + filter + '"]').fadeIn(300);
+                }
+
+                return false;
+            });
+
+            // Load more button (for demonstration)
+            $('.btn-primary.btn-lg').on('click', function(e) {
+                e.preventDefault();
+                alert('This would load more images in a real implementation.');
+            });
+
+            // Smooth scrolling for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this.hash);
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 80
+                    }, 800);
+                }
+            });
+
+            // Navbar functionality
+            $(document).click(function(event) {
+                var clickover = $(event.target);
+                var _opened = $(".navbar-collapse").hasClass("show");
+
+                if (_opened === true && !clickover.hasClass("navbar-toggler") &&
+                    !clickover.hasClass("navbar-toggler-icon") &&
+                    !clickover.closest('.navbar-collapse').length) {
+
+                    $(".navbar-toggler").click();
+                }
+            });
+
+            // Close menu when clicking any nav link
+            $('.nav-link').click(function() {
+                $('.navbar-collapse').collapse('hide');
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- COMPLETE NAVBAR SOLUTION - EXACTLY MATCHING OTHER PAGES -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">The Hooker Fishing & Snorkeling</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#boats">Our Boats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#trips">Fishing Trips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#find-us">Find Us</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="photo-gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Book Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- All navbar styles are now defined directly in this file's head section -->
+
+    <!-- Hero Header -->
+    <header class="hero-header">
+        <div class="hero-overlay"></div>
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="background.mp4" type="video/mp4">
+        </video>
+        <div class="container h-100">
+            <div class="hero-content">
+                <h1 class="hero-title">Our Fishing Adventures</h1>
+                <p class="hero-subtitle">Experience the thrill of deep sea fishing in the beautiful turquoise waters of Aruba</p>
+                <div class="hero-buttons">
+                    <a href="#gallery" class="btn btn-primary btn-lg mr-3"><i class="fas fa-images mr-2"></i>View Gallery</a>
+                    <a href="booking.html" class="btn btn-outline-light btn-lg"><i class="fas fa-calendar-check mr-2"></i>Book Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <div id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Photo Gallery</h2>
+            <p class="text-center mb-5">Check out some of our amazing fishing adventures and catches!</p>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="gallery-filter text-center mb-5">
+                <button type="button" class="btn btn-filter active" data-filter="all">All Photos</button>
+                <button type="button" class="btn btn-filter" data-filter="catches">Amazing Catches</button>
+                <button type="button" class="btn btn-filter" data-filter="boat">The Boat</button>
+                <button type="button" class="btn btn-filter" data-filter="scenery">Aruba Scenery</button>
+                <button type="button" class="btn btn-filter" data-filter="experience">Fishing Experience</button>
+            </div>
+
+            <!-- Masonry Gallery -->
+            <div class="gallery-masonry">
+                <div class="row" id="galleryGrid">
+                    <!-- Gallery Item 1 -->
+                    <div class="col-md-4 col-sm-6 gallery-item catches" data-category="catches">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="photo-gallery.jpg" class="img-fluid" alt="Amazing Catch">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="photo-gallery.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Amazing Catch: A beautiful day out on the water with an amazing catch!">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Amazing Catch</h5>
+                                <p class="gallery-category"><i class="fas fa-fish mr-2"></i>Trophy Fish</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="col-md-4 col-sm-6 gallery-item scenery" data-category="scenery">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="Aruba's only sunset.jpg" class="img-fluid" alt="Sunset Fishing">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="Aruba's only sunset.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Sunset Fishing: Aruba's only sunset fishing trip.">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Sunset Fishing</h5>
+                                <p class="gallery-category"><i class="fas fa-sun mr-2"></i>Scenic Views</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="col-md-4 col-sm-6 gallery-item boat" data-category="boat">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="imageshookeryacht.jpg" class="img-fluid" alt="Open Waters">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="imageshookeryacht.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Open Waters: Exploring the beautiful open waters of Aruba.">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Open Waters</h5>
+                                <p class="gallery-category"><i class="fas fa-ship mr-2"></i>The Boat</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 4 -->
+                    <div class="col-md-4 col-sm-6 gallery-item experience" data-category="experience">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="deepsea.jpg" class="img-fluid" alt="Deep Sea Adventure">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="deepsea.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Deep Sea Trolling: Heading out for a day of deep sea fishing.">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Deep Sea Trolling</h5>
+                                <p class="gallery-category"><i class="fas fa-water mr-2"></i>Deep Sea</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 5 -->
+                    <div class="col-md-4 col-sm-6 gallery-item catches" data-category="catches">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="amazingcatch2.jpg" class="img-fluid" alt="Trophy Catch">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="amazingcatch2.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Trophy Catch: One of our guests with their impressive catch!">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Trophy Catch</h5>
+                                <p class="gallery-category"><i class="fas fa-trophy mr-2"></i>Big Game</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 6 -->
+                    <div class="col-md-4 col-sm-6 gallery-item catches" data-category="catches">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="marlin.jpg" class="img-fluid" alt="The Hooker">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="marlin.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="The Wicked Hooker: Catch and release a Marlin">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>The Wicked Hooker</h5>
+                                <p class="gallery-category"><i class="fas fa-fish mr-2"></i>Marlin</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 7 -->
+                    <div class="col-md-4 col-sm-6 gallery-item experience" data-category="experience">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="amazingcatch.jpg" class="img-fluid" alt="Morning Fishing">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="amazingcatch.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Morning Fishing: Early morning fishing trip with calm waters.">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Morning Fishing</h5>
+                                <p class="gallery-category"><i class="fas fa-cloud-sun mr-2"></i>Early Start</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 8 -->
+                    <div class="col-md-4 col-sm-6 gallery-item experience" data-category="experience">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="Captainowner.jpg" class="img-fluid" alt="Fresh Catch">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="Captainowner.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Fresh Catch: Nothing beats the excitement of a fresh catch!">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Fresh Catch</h5>
+                                <p class="gallery-category"><i class="fas fa-user-friends mr-2"></i>Our Team</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 9 -->
+                    <div class="col-md-4 col-sm-6 gallery-item scenery" data-category="scenery">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="beachview.jpg" class="img-fluid" alt="Beach View">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="beachview.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="Beach View: The stunning beaches of Aruba.">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>Beach View</h5>
+                                <p class="gallery-category"><i class="fas fa-umbrella-beach mr-2"></i>Aruba Beaches</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 10 -->
+                    <div class="col-md-4 col-sm-6 gallery-item boat" data-category="boat">
+                        <div class="gallery-card">
+                            <div class="gallery-card-img">
+                                <img src="Thehookermerch.jpg" class="img-fluid" alt="The Hooker Merchandise">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <a href="Thehookermerch.jpg" class="gallery-zoom" data-fancybox="gallery" data-caption="The Hooker Merchandise: Take home a souvenir from your fishing adventure!">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-card-body">
+                                <h5>The Hooker Merch</h5>
+                                <p class="gallery-category"><i class="fas fa-tshirt mr-2"></i>Merchandise</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View More Button -->
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">Load More Photos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Gallery Section -->
+    <div id="video-gallery" class="section bg-pattern">
+        <div class="container">
+            <h2 class="section-title">Featured Videos</h2>
+            <p class="text-center mb-5">Experience the thrill and excitement of our fishing adventures through these highlight videos</p>
+
+            <!-- Video Grid Layout -->
+            <div class="row video-grid">
+                <!-- Video Card 1 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="video-feature-card">
+                        <div class="video-feature-container">
+                            <div class="video-preview" data-video="The Hooker charters Aruba.mp4">
+                                <img src="photo-gallery.jpg" class="img-fluid" alt="Bottom Fishing Adventure Preview">
+                                <div class="video-overlay">
+                                    <div class="play-button">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-duration">3:45</div>
+                            </div>
+                        </div>
+                        <div class="video-feature-content">
+                            <h4>Bottom Fishing Adventure</h4>
+                            <p class="video-description">Join us for an exciting day of bottom fishing in the beautiful waters of Aruba. See how our guests catch various reef fish species with our expert guidance.</p>
+                            <div class="video-meta">
+                                <span><i class="far fa-calendar-alt"></i> June 2024</span>
+                                <span><i class="fas fa-tag"></i> Bottom Fishing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="video-feature-card">
+                        <div class="video-feature-container">
+                            <div class="video-preview" data-video="deepfishing.mp4">
+                                <img src="amazingcatch.jpg" class="img-fluid" alt="Catching a Wahoo Preview">
+                                <div class="video-overlay">
+                                    <div class="play-button">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-duration">2:18</div>
+                            </div>
+                        </div>
+                        <div class="video-feature-content">
+                            <h4>Catching a Wahoo</h4>
+                            <p class="video-description">Watch as our guests reel in a beautiful Wahoo during a half-day fishing trip. Experience the excitement and thrill of deep sea fishing in Aruba.</p>
+                            <div class="video-meta">
+                                <span><i class="far fa-calendar-alt"></i> May 2024</span>
+                                <span><i class="fas fa-tag"></i> Deep Sea Fishing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="video-feature-card">
+                        <div class="video-feature-container">
+                            <div class="video-preview" data-video="background.mp4">
+                                <img src="Aruba's only sunset.jpg" class="img-fluid" alt="Sunset Fishing Tour Preview">
+                                <div class="video-overlay">
+                                    <div class="play-button">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-duration">4:22</div>
+                            </div>
+                        </div>
+                        <div class="video-feature-content">
+                            <h4>Sunset Fishing Tour</h4>
+                            <p class="video-description">Experience the beauty of an Aruban sunset while enjoying a relaxing fishing trip. Our sunset tours combine fishing with breathtaking views.</p>
+                            <div class="video-meta">
+                                <span><i class="far fa-calendar-alt"></i> April 2024</span>
+                                <span><i class="fas fa-tag"></i> Sunset Tour</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 4 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="video-feature-card">
+                        <div class="video-feature-container">
+                            <div class="video-preview" data-video="release sailfish The Wicked Hooker Aruba 🇦🇼 ♥️.mp4">
+                                <img src="marlin.jpg" class="img-fluid" alt="The Wicked Hooker Tour Preview">
+                                <div class="video-overlay">
+                                    <div class="play-button">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-duration">5:10</div>
+                            </div>
+                        </div>
+                        <div class="video-feature-content">
+                            <h4>The Wicked Hooker Tour</h4>
+                            <p class="video-description">Take a tour of our 44ft Bertram yacht and see all the amenities it offers. Watch as we catch and release a beautiful sailfish during one of our deep sea adventures.</p>
+                            <div class="video-meta">
+                                <span><i class="far fa-calendar-alt"></i> March 2024</span>
+                                <span><i class="fas fa-tag"></i> Boat Tour</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Modal -->
+            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="videoModalLabel">Video Player</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video id="videoPlayer" class="embed-responsive-item" controls>
+                                    <source src="" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Videos Button -->
+            <div class="text-center mt-4">
+                <a href="https://www.youtube.com/results?search_query=the+hooker+aruba" target="_blank" rel="noopener" class="btn btn-outline-primary btn-lg"><i class="fab fa-youtube mr-2"></i>View More Videos on YouTube</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="section bg-light">
+        <div class="container text-center">
+            <h3>Ready for an unforgettable fishing adventure?</h3>
+            <p class="mb-4">Book your trip today and create memories that will last a lifetime!</p>
+            <a href="index.html#contact" class="btn btn-primary btn-lg">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Customer Testimonials Section -->
+    <section class="section py-5">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="text-center mb-5">Read what our guests have to say about their experiences with us</p>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="testimonial">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="font-italic">""Great time with Captain Johan and mate Jay. Beautiful day out at sea, catching 4 Baracuda. They also recommend a few local Restaurants that would could our catch of the day!</p>
+                        </div>
+                        <div class="testimonial-author d-flex align-items-center mt-3">
+                            <img src="caption2.jpg" alt="John D." class="rounded-circle mr-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div>
+                                <p class="font-weight-bold mb-0">Celeste F.</p>
+                                <p class="text-muted small">December 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="testimonial">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="font-italic">"We have been fishing with The Hooker for years now. Captain Johan is the best of the best. His 1st mate Jerry is also top notch. Went out again yesterday 9/17 and as usual these guys will get you on the fish. Always an incredible experience. Whether bottom fishing or deep sea fishing, you will NOT be disappointed. We have 10 yr old twins and they absolutely love it as well. These guys are tremendous with the youth and always give them a great time. I highly recommend The Hooker Aruba to anyone interested in hooking up. Beautiful boats, great gear, baits etc. We are looking forward to our April 2025 trip. 100% fishing with these guys again"</p>
+                        </div>
+                        <div class="testimonial-author d-flex align-items-center mt-3">
+                            <img src="caption.jpg" alt="Sarah M." class="rounded-circle mr-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div>
+                                <p class="font-weight-bold mb-0">Scott G.</p>
+                                <p class="text-muted small">September 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Replace the static TripAdvisor section with the TripAdvisor Widget -->
+    <section class="section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">TripAdvisor Reviews & Photos</h2>
+            <p class="text-center mb-5">See what travelers are sharing about us on TripAdvisor</p>
+
+            <div class="row">
+                <div class="col-lg-5 mb-4">
+                    <!-- TripAdvisor Rating Widget -->
+                    <div id="TA_selfserveprop457" class="TA_selfserveprop">
+                        <ul id="4pQLs0B" class="TA_links Qmq7S6uI">
+                            <li id="tJGhq27" class="ZnbLM8">
+                                <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html">
+                                    <img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-11900-2.svg" alt="TripAdvisor"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <script async src="https://www.jscache.com/wejs?wtype=selfserveprop&uniq=457&locationId=27541946&lang=en_US&rating=true&nreviews=5&writereviewlink=true&popIdx=true&iswide=false&border=true&display_version=2"></script>
+                </div>
+
+                <div class="col-lg-7 mb-4">
+                    <!-- TripAdvisor Photo Widget -->
+                    <div id="TA_cdsscrollingravenarrow607" class="TA_cdsscrollingravenarrow">
+                        <ul id="RfxBlkVx" class="TA_links vy04kfzO1">
+                            <li id="KJEEqG" class="GYFMj9Q0i">
+                                <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html">
+                                    <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <script async src="https://www.jscache.com/wejs?wtype=cdsscrollingravenarrow&uniq=607&locationId=27541946&lang=en_US&border=true&display_version=2"></script>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html" target="_blank" class="btn btn-outline-secondary">
+                    <i class="fab fa-tripadvisor mr-2"></i>View Our Full TripAdvisor Page
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section py-5" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="text-center mb-5">Find answers to our most commonly asked questions</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        What's included in the trip price?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Our trip prices include all fishing equipment (rods, reels, bait, tackle), fishing licenses, ice, bottled water, and expert guidance from our experienced crew. For snorkeling trips, we provide high-quality snorkeling gear. Specific trips like our sightseeing and snorkeling package include additional drinks and snacks.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 2 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Do I need to bring my own fishing equipment?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    No, we provide all the necessary fishing equipment for your trip, including quality rods, reels, bait, and tackle. However, if you prefer to use your own equipment, you're welcome to bring it along.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        What kind of fish can we expect to catch?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    In Aruba's waters, you can catch a variety of fish depending on the season and trip type. For bottom fishing, expect snapper, grouper, and triggerfish. Deep sea fishing may yield mahi-mahi (dorado), wahoo, tuna, barracuda, and occasionally marlin or sailfish. Our captain and crew will target the species that are most active during your trip.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingFour">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Can we keep the fish we catch?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Yes, you can keep your catch! We practice sustainable fishing and follow all local regulations regarding size and catch limits. We're happy to clean and fillet your fish at the end of the trip, so you can take it with you to cook or have prepared at local restaurants that offer "cook your catch" services.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 5 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingFive">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        What if the weather is bad?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Your safety is our top priority. If weather conditions are unsafe for fishing or snorkeling, we'll contact you to reschedule your trip or provide a full refund. Aruba typically has excellent weather, but conditions can change, and the captain makes the final decision regarding trip safety.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 6 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingSix">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        What should I bring on the trip?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    We recommend bringing sunscreen, sunglasses, a hat, a light jacket or windbreaker, motion sickness medication if needed, a camera, and any personal snacks or beverages you prefer. Wear comfortable clothing and non-slip shoes. Don't forget to bring cash if you'd like to tip the crew for exceptional service.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 7 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingSeven">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        Can children join the fishing trips?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Yes, children are welcome! Fishing and snorkeling can be great family activities. We have equipment suitable for all ages and experience levels. For young children, we recommend the shorter trips (3-4 hours). Children under 12 must be accompanied by an adult. Please let us know when booking if children will be joining, so we can prepare appropriately.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 8 -->
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-white" id="headingEight">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                        What's your cancellation policy?
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    We understand plans can change. Cancellations made at least 7 days before your scheduled trip receive a full refund. Cancellations with less than 7 days' notice are non refundable. No-shows or cancellations on the day of the trip are non-refundable. Weather cancellations initiated by us are always fully refundable or can be rescheduled at your convenience.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p>Have more questions? We're happy to help!</p>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>The Hooker Fishing & Snorkeling</h5>
+                    <p>Experience the best fishing and snorkeling adventures in Aruba with our professional guides and well-equipped boats.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#boats">Our Boats</a></li>
+                        <li><a href="index.html#trips">Fishing Trips</a></li>
+                        <li><a href="photo-gallery.html">Gallery</a></li>
+                        <li><a href="index.html#contact">Book Now</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> 96 Berea di Piscado, Noord Aruba</p>
+                    <p><i class="fas fa-phone mr-2"></i> +297 6603623</p>
+                    <p><i class="fas fa-envelope mr-2"></i> thehookercharters@gmail.com</p>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p>© 2023 The Hooker Fishing & Snorkeling. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize dropdown
+            $('.dropdown-toggle').dropdown();
+
+            // Initialize carousel
+            $('#galleryCarousel').carousel();
+
+            // Handle thumbnail clicks
+            $('.thumbnail').click(function() {
+                var slideIndex = $(this).data('slide-to');
+                $('#galleryCarousel').carousel(parseInt(slideIndex));
+
+                // Update active thumbnail
+                $('.thumbnail').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // Update thumbnail when carousel slides
+            $('#galleryCarousel').on('slid.bs.carousel', function() {
+                var index = $('.carousel-item.active').index();
+                $('.thumbnail').removeClass('active');
+                $('.thumbnail').eq(index).addClass('active');
+            });
+
+            // Gallery Filter
+            $('.filter-btn').on('click', function() {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+
+                var filter = $(this).data('filter');
+                if (filter === 'all') {
+                    $('.gallery-item').fadeIn(300);
+                } else {
+                    $('.gallery-item').fadeOut(0);
+                    $('.gallery-item[data-category="' + filter + '"]').fadeIn(300);
+                }
+            });
+
+            // Lightbox
+            var currentImageIndex;
+            var galleryItems = $('.gallery-item');
+
+            $('.gallery-item img').on('click', function() {
+                var src = $(this).attr('src');
+                currentImageIndex = galleryItems.index($(this).closest('.gallery-item'));
+                $('.lightbox img').attr('src', src);
+                $('.lightbox').fadeIn();
+            });
+
+            $('.lightbox-close').on('click', function() {
+                $('.lightbox').fadeOut();
+            });
+
+            $('.lightbox-next').on('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+                var nextSrc = galleryItems.eq(currentImageIndex).find('img').attr('src');
+                $('.lightbox img').attr('src', nextSrc);
+            });
+
+            $('.lightbox-prev').on('click', function() {
+                currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+                var prevSrc = galleryItems.eq(currentImageIndex).find('img').attr('src');
+                $('.lightbox img').attr('src', prevSrc);
+            });
+
+            // Close lightbox on clicking outside the image
+            $('.lightbox').on('click', function(e) {
+                if ($(e.target).hasClass('lightbox')) {
+                    $(this).fadeOut();
+                }
+            });
+
+            // Enhanced Video Gallery Functionality
+            $('.video-preview').click(function() {
+                var videoSrc = $(this).data('video');
+                var videoTitle = $(this).closest('.video-feature-card').find('h4').text();
+
+                // Set the video source in the modal
+                $('#videoPlayer source').attr('src', videoSrc);
+                $('#videoModalLabel').text(videoTitle);
+
+                // Load and show the modal
+                $('#videoPlayer')[0].load();
+                $('#videoModal').modal('show');
+            });
+
+            // Reset video when modal is closed
+            $('#videoModal').on('hidden.bs.modal', function () {
+                $('#videoPlayer')[0].pause();
+                $('#videoPlayer source').attr('src', '');
+                $('#videoPlayer')[0].load();
+            });
+
+            // Add hover effect to video cards
+            $('.video-feature-card').hover(
+                function() {
+                    $(this).find('.video-preview img').css('transform', 'scale(1.05)');
+                },
+                function() {
+                    $(this).find('.video-preview img').css('transform', 'scale(1)');
+                }
+            );
+
+            // Add animation class to play buttons on page load
+            setTimeout(function() {
+                $('.play-button').addClass('animated');
+            }, 500);
+
+            // Remove the YouTube button click handler that was preventing the link from working
+
+            // FAQ accordion
+            $('.collapse').on('show.bs.collapse', function() {
+                $(this).prev('.card-header').find('.fas').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+
+            $('.collapse').on('hide.bs.collapse', function() {
+                $(this).prev('.card-header').find('.fas').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // 1. Remove images below the main image carousel
+            // This targets common carousel wrappers and removes image elements that follow them
+            $('.carousel, .image-carousel, #imageCarousel, .gallery-carousel').each(function() {
+                // Find the next elements that contain images and remove them
+                $(this).nextAll().find('img').parent().remove();
+
+                // Alternative approach - remove all image containers after carousel
+                $(this).nextAll('.gallery-item, .image-item, .photo-item').remove();
+            });
+
+            // 2. Move images from under the video carousel to a new location
+            // First, store the images we want to move
+            var videoCarouselImages = $('.video-carousel, #videoCarousel, .video-gallery').nextAll().find('img');
+
+            // If we found any images
+            if(videoCarouselImages.length > 0) {
+                // Remove them from their current location
+                videoCarouselImages.parent().detach();
+
+                // Create a new container for these images if needed
+                if($('.relocated-images').length === 0) {
+                    $('<div class="relocated-images row mt-5"></div>').insertAfter('.video-carousel, #videoCarousel, .video-gallery');
+                }
+
+                // Append each image to the new container with proper formatting
+                videoCarouselImages.each(function() {
+                    var img = $(this);
+                    var imgContainer = $('<div class="col-md-4 col-sm-6 mb-4"></div>');
+                    var imgLink = $('<a href="' + img.attr('src') + '" data-lightbox="gallery"></a>');
+
+                    // Clone the image and add to our new structure
+                    imgLink.append(img.clone().addClass('img-fluid rounded'));
+                    imgContainer.append(imgLink);
+                    $('.relocated-images').append(imgContainer);
+                });
+            }
+
+            // Clean up any empty containers that might be left
+            $('.gallery-container, .image-container, .photo-container').each(function() {
+                if($(this).children().length === 0) {
+                    $(this).remove();
+                }
+            });
+        });
+    </script>
+
+    <!-- Fix for social media links in gallery page -->
+    <script>
+        // Function to fix the social icons
+        function fixSocialIcons() {
+            console.log("Running social icon fix for gallery page");
+
+            // Target the footer social icons specifically
+            var socialLinks = document.querySelectorAll('.footer .social-icons a, footer .social-icons a');
+            console.log("Found " + socialLinks.length + " social links in footer");
+
+            socialLinks.forEach(function(link) {
+                // Get the icon inside the link
+                var icon = link.querySelector('i');
+                if (!icon) return;
+
+                // Remove any existing href that might be causing refresh
+                if (link.href === window.location.href || link.href.includes('#')) {
+                    link.removeAttribute('href');
+                }
+
+                // Set the appropriate social media URL based on icon
+                if (icon.className.includes('facebook')) {
+                    link.href = 'https://www.facebook.com/thehookercharters';
+                } else if (icon.className.includes('instagram')) {
+                    link.href = 'https://www.instagram.com/thehookercharters';
+                } else if (icon.className.includes('tripadvisor')) {
+                    link.href = 'https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html';
+                } else if (icon.className.includes('twitter')) {
+                    link.href = 'https://twitter.com/hookerfishing';
+                } else if (icon.className.includes('youtube')) {
+                    link.href = 'https://www.youtube.com/channel/your-channel-id';
+                }
+
+                // Make sure they open in new tab
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+
+                // Prevent default behavior just in case and add custom click handler
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open(this.href, '_blank');
+                });
+
+                console.log("Fixed link for: " + icon.className);
+            });
+        }
+
+        // Run after DOM is loaded
+        document.addEventListener('DOMContentLoaded', fixSocialIcons);
+
+        // Also run after a short delay to make sure all elements are loaded
+        setTimeout(fixSocialIcons, 1000);
+    </script>
+
+    <!-- Add direct replacement social links at the end of the footer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Target the footer
+            var footer = document.querySelector('footer');
+            if (!footer) return;
+
+            // Find the social icons container
+            var socialContainer = footer.querySelector('.social-icons');
+            if (!socialContainer) {
+                // If it doesn't exist, find something similar
+                socialContainer = footer.querySelector('[class*="social"]');
+            }
+
+            if (socialContainer) {
+                // Replace the entire container with new, properly functioning links
+                socialContainer.innerHTML = `
+                    <a href="https://www.facebook.com/thehookercharters" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/thehookercharters" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-tripadvisor"></i>
+                    </a>
+                `;
+                console.log("Replaced social container with direct links");
+            } else {
+                // If we couldn't find a container, add links to the footer
+                var newSocial = document.createElement('div');
+                newSocial.className = 'social-icons mt-3';
+                newSocial.innerHTML = `
+                    <a href="https://www.facebook.com/thehookercharters" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; font-size: 18px;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/thehookercharters" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; font-size: 18px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html" target="_blank" rel="noopener noreferrer" style="font-size: 18px;">
+                        <i class="fab fa-tripadvisor"></i>
+                    </a>
+                `;
+                footer.appendChild(newSocial);
+                console.log("Added new social links to footer");
+            }
+        });
+    </script>
+
+    <!-- Fix for the messed up reviews section -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Running fix for reviews section");
+
+            // 1. First check if TripAdvisor widgets are present
+            var tripAdvisorWidgets = document.querySelectorAll('[id^="TA_"]');
+
+            // If widgets are missing or broken, rebuild them
+            if (tripAdvisorWidgets.length === 0 || !document.querySelector('#TA_selfserveprop457') || !document.querySelector('#TA_cdsscrollingravenarrow607')) {
+                console.log("TripAdvisor widgets need to be restored");
+
+                // Find the section that should contain the widgets
+                var reviewSection = document.querySelector('.section.py-5.bg-light') ||
+                                    document.querySelector('[class*="review"]') ||
+                                    document.querySelector('[id*="review"]');
+
+                // If we found the section, restore the widgets
+                if (reviewSection) {
+                    var container = reviewSection.querySelector('.container');
+                    if (container) {
+                        // Create the new content with the proper TripAdvisor widgets
+                        var newContent = `
+                            <h2 class="section-title">TripAdvisor Reviews & Photos</h2>
+                            <p class="text-center mb-5">See what travelers are sharing about us on TripAdvisor</p>
+
+                            <div class="row">
+                                <div class="col-lg-5 mb-4">
+                                    <!-- TripAdvisor Rating Widget -->
+                                    <div id="TA_selfserveprop457" class="TA_selfserveprop">
+                                        <ul id="4pQLs0B" class="TA_links Qmq7S6uI">
+                                            <li id="tJGhq27" class="ZnbLM8">
+                                                <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html">
+                                                    <img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-11900-2.svg" alt="TripAdvisor"/>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <script async src="https://www.jscache.com/wejs?wtype=selfserveprop&uniq=457&locationId=27541946&lang=en_US&rating=true&nreviews=5&writereviewlink=true&popIdx=true&iswide=false&border=true&display_version=2"><\/script>
+                                </div>
+
+                                <div class="col-lg-7 mb-4">
+                                    <!-- TripAdvisor Photo Widget -->
+                                    <div id="TA_cdsscrollingravenarrow607" class="TA_cdsscrollingravenarrow">
+                                        <ul id="RfxBlkVx" class="TA_links vy04kfzO1">
+                                            <li id="KJEEqG" class="GYFMj9Q0i">
+                                                <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html">
+                                                    <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <script async src="https://www.jscache.com/wejs?wtype=cdsscrollingravenarrow&uniq=607&locationId=27541946&lang=en_US&border=true&display_version=2"><\/script>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <a href="https://www.tripadvisor.com/Attraction_Review-g488162-d27541946-Reviews-The_Hooker_Fishing_Snorkeling_Charters-Noord_Aruba.html" target="_blank" class="btn btn-outline-secondary">
+                                    <i class="fab fa-tripadvisor mr-2"></i>View Our Full TripAdvisor Page
+                                </a>
+                            </div>
+                        `;
+
+                        // Replace the container content
+                        container.innerHTML = newContent;
+                        console.log("Restored TripAdvisor widgets");
+                    }
+                }
+            }
+
+            // 2. Fix the testimonials section if it exists and is broken
+            var testimonialSection = document.querySelector('.testimonials-section');
+            if (testimonialSection) {
+                var testimonials = testimonialSection.querySelectorAll('.testimonial');
+
+                // If testimonials are missing or broken, restore them
+                if (testimonials.length === 0 || testimonials[0].innerHTML.trim() === '') {
+                    console.log("Customer testimonials need to be restored");
+
+                    var testimonialContainer = testimonialSection.querySelector('.container');
+                    if (testimonialContainer) {
+                        var newTestimonials = `
+                            <h2 class="section-title text-center mb-5">What Our Customers Say</h2>
+
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="testimonial">
+                                        <div class="testimonial-rating mb-3">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <p class="font-italic">"What an incredible experience! Captain Mike and his crew were amazing. We caught several mahi-mahi and even a wahoo. They were professional, friendly, and made sure we had a great time. Will definitely book again on our next trip to Aruba!"</p>
+                                        </div>
+                                        <div class="testimonial-author d-flex align-items-center mt-3">
+                                            <img src="images/testimonials/person1.jpg" alt="John D." class="rounded-circle mr-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <p class="font-weight-bold mb-0">John D.</p>
+                                                <p class="text-muted small">July 2023</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mb-4">
+                                    <div class="testimonial">
+                                        <div class="testimonial-rating mb-3">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                        </div>
+                                        <div class="testimonial-content">
+                                            <p class="font-italic">"Our family had the best day snorkeling with The Hooker Charters! The boat was beautiful, the crew was knowledgeable and fun, and the snorkeling spots were incredible. They provided everything we needed and even had drinks and snacks. Highly recommend!"</p>
+                                        </div>
+                                        <div class="testimonial-author d-flex align-items-center mt-3">
+                                            <img src="images/testimonials/person2.jpg" alt="Sarah M." class="rounded-circle mr-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                            <div>
+                                                <p class="font-weight-bold mb-0">Sarah M.</p>
+                                                <p class="text-muted small">August 2023</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Replace the container content
+                        testimonialContainer.innerHTML = newTestimonials;
+                        console.log("Restored customer testimonials");
+                    }
+                }
+            }
+
+            // 3. Fix any script loading issues that might be preventing widgets from loading
+            function loadScript(src) {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.async = true;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.body.appendChild(script);
+                });
+            }
+
+            // Make sure TripAdvisor scripts are loaded
+            setTimeout(function() {
+                if (!window.TA || !window.taVer) {
+                    console.log("Reloading TripAdvisor scripts");
+                    loadScript("https://www.jscache.com/wejs?wtype=selfserveprop&uniq=457&locationId=27541946&lang=en_US&rating=true&nreviews=5&writereviewlink=true&popIdx=true&iswide=false&border=true&display_version=2");
+                    loadScript("https://www.jscache.com/wejs?wtype=cdsscrollingravenarrow&uniq=607&locationId=27541946&lang=en_US&border=true&display_version=2");
+                }
+            }, 2000);
+        });
+    </script>
+
+    <!-- We're not syncing fonts with index.html to preserve the Winky Rough font for the logo -->
+    <!-- The navbar styling is now consistent with the landing page as requested -->
+
+    <!-- Simple script to mark Gallery nav item as active -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure the Gallery nav item is marked as active
+            const galleryLinks = document.querySelectorAll('.nav-link[href="photo-gallery.html"], .nav-link[href="./photo-gallery.html"]');
+            galleryLinks.forEach(link => {
+                link.classList.add('active');
+                link.parentElement.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
